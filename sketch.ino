@@ -10,7 +10,7 @@ void Timer0_init()
   TCCR0B |= (1<<CS02);
   TCCR0B |= (1<<CS00);
   
-  //porównywacz - 1ms
+  //1ms
   OCR0A = 15;
 
   //włączenie przerwań 
@@ -26,13 +26,9 @@ int main()
 {
   //diody
   DDRD |= (1<<PD5);
-  DDRD |= (1<<PD3);
-  DDRD |= (1<<PD4);
-
+  
   PORTD &= ~(1<<PD5);
-  PORTD &= ~(1<<PD3);
-  PORTD &= ~(1<<PD4);
-
+  
   Timer0_init();
   
   while(1)
@@ -46,7 +42,6 @@ ISR(TIMER0_COMPA_vect)
   licznik++;
   if(licznik==1000)
   {
-    // Prosty kod debugujący do sprawdzenia działania przerwań
     PORTD ^= (1<<PD5); // Zmiana stanu diody
     licznik=0;
   }
